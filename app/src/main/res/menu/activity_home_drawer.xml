@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/map"
+            android:title="Mapa"
+            android:iconTint="#000"
+            />
+
+        <item
+            android:id="@+id/nav_service"
+            android:icon="@drawable/turn_on"
+            android:title="Activar servicio"
+            android:iconTint="#000"/>
+
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/menu_notification"
+            android:title="Notificaciones"
+            android:iconTint="#000"/>
+
+        <item
+            android:id="@+id/nav_alarm"
+            android:icon="@drawable/menu_notification"
+            android:title="Alarmas"
+            android:iconTint="#000"/>
+
+        <item
+            android:id="@+id/nav_shared_users"
+            android:icon="@drawable/shared_users"
+            android:title="Usuarios compartidos"
+            android:iconTint="#000"/>
+
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home2"
+            android:iconTint="#000"/>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <!--<item-->
+            <!--android:id="@+id/nav_bt"-->
+            <!--android:icon="@drawable/green_chat_button"-->
+            <!--android:title="Bluetooth Chat"-->
+            <!--android:iconTint="#000"/>-->
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Cerrar Sesión"
+            android:iconTint="#000"/>
+    </group>
+</menu>

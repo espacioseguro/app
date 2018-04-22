@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item
+        android:id="@+id/home2_nav_maps"
+        android:icon="@drawable/map"
+        android:title="Mapa"
+        android:iconTint="#000"
+        />
+
+    <item
+        android:id="@+id/home2_nav_notification"
+        android:icon="@drawable/menu_notification"
+        android:title="Notificaciones"
+        android:iconTint="#000"/>
+
+    <item
+        android:id="@+id/home2_nav_alarm"
+        android:icon="@drawable/ic_menu_send"
+        android:title="Alarmas"
+        android:iconTint="#000"/>
+
+    <item
+        android:id="@+id/home2_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:iconTint="#000"/>
+</menu>

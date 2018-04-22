@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1038908979757",
+    "firebase_url": "https://espacioseguro-56b00.firebaseio.com",
+    "project_id": "espacioseguro-56b00",
+    "storage_bucket": "espacioseguro-56b00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038908979757:android:89072ad601400769",
+        "android_client_info": {
+          "package_name": "com.solution.tecno.espacioseguro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038908979757-ck3nqacf7v6nqs01v2fqprega2mso4c0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solution.tecno.espacioseguro",
+            "certificate_hash": "9ba27504b8b8d9fffe24cfa2520ef8b5f330227c"
+          }
+        },
+        {
+          "client_id": "1038908979757-l16dvbvthj1m9moun9ccqqmkdenuqg72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2s-zxAZ0idqTnhE1_PT28REhmTZOFijA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038908979757-l16dvbvthj1m9moun9ccqqmkdenuqg72.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
