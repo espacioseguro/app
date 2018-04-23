@@ -48,9 +48,9 @@ import java.util.HashMap;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     SessionManager session;
+    User u;
     TextView tv_name,tv_code_service;
     String result="";
-    User u;
 
 
     @Override
@@ -183,6 +183,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
         }else if(id==R.id.nav_shared_users){
             fr=SharedUsersFragment.newInstance();
+            fragmentTransaction.replace(R.id.flaContenido,fr);
+            fragmentTransaction.commit();
+        }else if(id==R.id.nav_services){
+            fr=ServicesFragment.newInstance();
+            fragmentTransaction.replace(R.id.flaContenido,fr);
+            fragmentTransaction.commit();
+        }else if(id==R.id.nav_request){
+            fr=RequestFragment.newInstance();
             fragmentTransaction.replace(R.id.flaContenido,fr);
             fragmentTransaction.commit();
         }else if(id==R.id.nav_logout) {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_maps"
             android:icon="@drawable/map"
@@ -25,7 +25,7 @@
 
         <item
             android:id="@+id/nav_alarm"
-            android:icon="@drawable/menu_notification"
+            android:icon="@drawable/home_alarm"
             android:title="Alarmas"
             android:iconTint="#000"/>
 
@@ -36,17 +36,24 @@
             android:iconTint="#000"/>
 
         <item
+            android:id="@+id/nav_services"
+            android:icon="@drawable/service"
+            android:title="Mis Servicios"
+            android:iconTint="#000"/>
+
+        <item
+            android:id="@+id/nav_request"
+            android:icon="@drawable/request_icon"
+            android:title="Solicitudes"
+            android:iconTint="#000"/>
+
+        <item
             android:id="@+id/nav_home"
             android:title="Home2"
             android:iconTint="#000"/>
     </group>
 
-    <group android:checkableBehavior="single">
-        <!--<item-->
-            <!--android:id="@+id/nav_bt"-->
-            <!--android:icon="@drawable/green_chat_button"-->
-            <!--android:title="Bluetooth Chat"-->
-            <!--android:iconTint="#000"/>-->
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

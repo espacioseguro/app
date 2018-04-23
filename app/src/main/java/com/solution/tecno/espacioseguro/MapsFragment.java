@@ -141,7 +141,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 LatLng latLng = new LatLng(latitud, longitud);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
                 mMap.animateCamera(cameraUpdate);
-                //mMap.addMarker(new MarkerOptions().position(latLng));
                 showLocationConfirmation(u.getId(), latitud, longitud);
             }
         });

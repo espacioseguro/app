@@ -1,15 +1,9 @@
 package com.solution.tecno.espacioseguro;
 
-import android.app.ProgressDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -44,7 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class AlarmFragment extends Fragment {
+public class ServicesFragment extends Fragment {
 
     RecyclerView activity;
     AlarmAdapter adapter;
@@ -55,13 +48,13 @@ public class AlarmFragment extends Fragment {
     EditText service_code;
     User u;
 
-    public AlarmFragment() {
+    public ServicesFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static AlarmFragment newInstance() {
-        AlarmFragment fragment = new AlarmFragment();
+    public static ServicesFragment newInstance() {
+        ServicesFragment fragment = new ServicesFragment();
         return fragment;
     }
 
@@ -113,14 +106,14 @@ public class AlarmFragment extends Fragment {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
                                         md=new MaterialDialog.Builder(getContext())
-                                                .content("Enviando Solicitud")
+                                                .content("Guardando")
                                                 .progress(true,0)
                                                 .cancelable(false)
                                                 .backgroundColor(Color.WHITE)
                                                 .contentColor(Color.BLACK)
                                                 .titleColor(Color.RED)
                                                 .show();
-                                        addServiceCode(service_code.getText().toString(),u.getId());
+                                        validateCode(service_code.getText().toString(),u.getId());
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -135,7 +128,7 @@ public class AlarmFragment extends Fragment {
         });
 
 
-        new AlarmFragment.DoInBackGround().execute();
+        new ServicesFragment.DoInBackGround().execute();
         return view;
     }
 
@@ -250,8 +243,8 @@ public class AlarmFragment extends Fragment {
                         JSONParser p=new JSONParser();
 
                         try {
-                            org.json.simple.JSONArray a=(org.json.simple.JSONArray)p.parse(response);
-                            org.json.simple.JSONObject o=(org.json.simple.JSONObject)a.get(0);
+                            JSONArray a=(JSONArray)p.parse(response);
+                            JSONObject o=(JSONObject)a.get(0);
                             if(o.get("contador")=="0"){
                                 addServiceCode(idUser,service_code);
                             }else{
@@ -282,7 +275,7 @@ public class AlarmFragment extends Fragment {
         System.out.println("service_code: "+service_code);
         md.show();
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = "https://www.espacioseguro.pe/php_connection/sendRequest.php?code="+service_code+"&idUser="+idUser;
+        String url = "https://www.espacioseguro.pe/php_connection/activateService.php?code="+service_code+"&idUser="+idUser;
         System.out.println("url: "+url);
 
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -324,9 +317,9 @@ public class AlarmFragment extends Fragment {
                         if(response!="[]"){
                             JSONParser p=new JSONParser();
                             try {
-                                org.json.simple.JSONArray a=(org.json.simple.JSONArray)p.parse(response);
+                                JSONArray a=(JSONArray)p.parse(response);
                                 if(a.size()!=0){
-                                    org.json.simple.JSONObject o=(org.json.simple.JSONObject)a.get(0);
+                                    JSONObject o=(JSONObject)a.get(0);
                                     System.out.println(o.toJSONString());
                                     session.createLoginSession(email,o.toJSONString());
                                     HashMap<String,String> user=session.getUserDetails();

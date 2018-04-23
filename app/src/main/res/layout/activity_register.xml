@@ -12,6 +12,11 @@
     tools:context="com.solution.tecno.espacioseguro.RegisterActivity"
     android:background="#aaa">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo_positivo"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

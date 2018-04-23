@@ -1,27 +1,22 @@
 package com.solution.tecno.espacioseguro;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.LoaderManager;
-import android.content.CursorLoader;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -49,10 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -62,6 +55,9 @@ public class RegisterActivity extends AppCompatActivity{
     private EditText password,name,phone,username;
     private Button registerButton;
     private ImageView show_password;
+    private CheckBox terms,information;
+    private int terms_val,information_val=0;
+    private Context context=RegisterActivity.this;
     SessionManager session;
 
     private String result="";
@@ -136,6 +132,32 @@ public class RegisterActivity extends AppCompatActivity{
         password=findViewById(R.id.register_password);
         phone=findViewById(R.id.register_phone);
         registerButton=findViewById(R.id.register_button);
+        terms=findViewById(R.id.terms);
+        information=findViewById(R.id.information);
+
+        terms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    terms_val=1;
+                    Toast.makeText(context,"terms_checked "+terms_val,Toast.LENGTH_SHORT).show();
+                }else{
+                    terms_val=0;
+                    Toast.makeText(context,"terms_unchecked "+terms_val,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        information.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    information_val=1;
+                }else{
+                    information_val=0;
+                }
+            }
+        });
         show_password=findViewById(R.id.register_show_password);
         show_password.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,32 +179,44 @@ public class RegisterActivity extends AppCompatActivity{
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mName=name.getText().toString();
-                mPhone=phone.getText().toString();
-                mUsername=username.getText().toString();
-                mPassword=password.getText().toString();
-                int delay = 5000;// in ms
+                if(terms_val==0){
+                    md=new MaterialDialog.Builder(context)
+                            .limitIconToDefaultSize()
+                            .title("Términos y condiciones")
+                            .content("Debe aceptar los términos y condiciones para continuar")
+                            .backgroundColor(Color.WHITE)
+                            .titleColor(Color.RED)
+                            .contentColor(Color.BLACK)
+                            .positiveText("Aceptar")
+                            .onAny(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    md.dismiss();
+                                }
+                            })
+                            .show();
+                }else{
+                    mName=name.getText().toString();
+                    mPhone=phone.getText().toString();
+                    mUsername=username.getText().toString();
+                    mPassword=password.getText().toString();
+                    int delay = 5000;// in ms
 
-                Timer timer = new Timer();
-                md=new MaterialDialog.Builder(RegisterActivity.this)
-                        .content("Guardando")
-                        .progress(true,0)
-                        .cancelable(false)
-                        .backgroundColor(Color.WHITE)
-                        .contentColor(Color.BLACK)
-                        .show();
+                    Timer timer = new Timer();
+                    md=new MaterialDialog.Builder(RegisterActivity.this)
+                            .content("Guardando")
+                            .progress(true,0)
+                            .cancelable(false)
+                            .backgroundColor(Color.WHITE)
+                            .contentColor(Color.BLACK)
+                            .show();
 
-                timer.schedule( new TimerTask(){
-                    public void run() {
-                        registerRequest(mUsername,mPassword,mName,mPhone);
-//                        session.createLoginSession(mEmail,getDatos(mEmail));
-//                        HashMap<String,String> user=session.getUserDetails();
-//                        setUserValues(user.get(SessionManager.KEY_VALUES));
-//                        Intent intent=new Intent(RegisterActivity.this,HomeActivity.class);
-//                        startActivity(intent);
-//                        md.dismiss();
-                    }
-                }, delay);
+                    timer.schedule( new TimerTask(){
+                        public void run() {
+                            registerRequest(mUsername,mPassword,mName,mPhone);
+                        }
+                    }, delay);
+                }
             }
         });
 
@@ -242,7 +276,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     public void registerRequest(final String username,final String psw,final String name,final String phone){
         RequestQueue queue = Volley.newRequestQueue(this);
-        String params="?username="+username+"&psw="+psw+"&name="+name+"&phone="+phone;
+        String params="?username="+username+"&psw="+psw+"&name="+name+"&phone="+phone+"&information="+information_val;
         String url = "https://www.espacioseguro.pe/php_connection/register.php"+params;
         System.out.println(url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
