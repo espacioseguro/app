@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.solution.tecno.espacioseguro.MainActivity"
+    tools:context="com.solution.tecno.seguro.com.solution.tecno.seguro.MainActivity"
     android:background="@drawable/fondo_inicio"
     android:orientation="vertical"
     android:gravity="center">
     <!--android:background="#47B"-->
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:id="@+id/main_logo"
         android:src="@drawable/logo_negativo"
         android:layout_gravity="center_horizontal"/>

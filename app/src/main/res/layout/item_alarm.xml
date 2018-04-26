@@ -19,27 +19,45 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/item_alarm_name"
                 android:textSize="20sp"
+                android:layout_weight="1"
                 android:textColor="@color/cardview_light_background"
                 android:gravity="center"/>
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/item_alarm_code"
                 android:textSize="20sp"
+                android:layout_weight="1"
                 android:textColor="@color/cardview_light_background"
                 android:gravity="center"/>
 
-            <ImageView
-                android:layout_width="100dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/item_alarm_edit"
-                android:layout_gravity="center"
-                android:src="@drawable/edit_alarm"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_alarm_edit"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/edit_alarm"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/item_alarm_delete"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/delete_user"/>
+            </LinearLayout>
+
 
         </LinearLayout>
     </LinearLayout>

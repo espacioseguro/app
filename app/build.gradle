@@ -4,10 +4,10 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.solution.tecno.espacioseguro"
-        minSdkVersion 22
+        minSdkVersion 24
         targetSdkVersion 27
-        versionCode 6
-        versionName "6"
+        versionCode 9
+        versionName "9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -40,6 +40,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.1'
     implementation 'com.jaredrummler:material-spinner:1.2.1'
+    implementation 'com.github.hassanusman:CircularDialogs:1.2'
+    implementation 'com.github.blennerSilva:AwesomeDialog:2.0.5'
 
     implementation 'com.facebook.android:facebook-android-sdk:4.32.0'
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'

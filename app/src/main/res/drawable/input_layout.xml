@@ -3,11 +3,11 @@
     android:shape="line">
     <stroke
         android:width="4dp"
-        android:color="#49D" />
+        android:color="#ECE65F" />
 
     // the inside color
     <solid
-        android:color="@color/colorAccent"
+        android:color="#ECE65F"
         />
 
     <corners android:radius="360dp" />
