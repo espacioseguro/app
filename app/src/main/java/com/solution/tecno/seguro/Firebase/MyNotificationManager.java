@@ -45,6 +45,7 @@ public class MyNotificationManager {
         v.vibrate(pattern, -1);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mCtx, Constants.CHANNEL_ID)
+                        .setSmallIcon(R.drawable.logo_positivo)
                         .setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(),R.drawable.logo_positivo))
                         .setContentTitle("Estado del servicio")
                         .setColor(Color.BLUE)
