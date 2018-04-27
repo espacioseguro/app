@@ -37,15 +37,12 @@ public class MyFirebaseInstanceIdService extends FirebaseInstanceIdService {
         //for now we are displaying the token in the log
         //copy it as this method is called only when the new token is generated
         //and usually new token is only generated when the app is reinstalled or the data is cleared
-        Log.d("MyRefreshedToken", token);
         RequestQueue queue = Volley.newRequestQueue(this);
         session=new SessionManager(getApplicationContext());
         HashMap<String,String> user=session.getUserDetails();
         Gson g=new Gson();
         u=g.fromJson(user.get(SessionManager.KEY_VALUES),User.class);
         if(u!=null){
-
-            System.out.println("***** user_id= "+u.getId());
             String params="?idUser="+u.getId()+"&fcm="+token;
             String url = "https://espacioseguro.pe/php_connection/updateFCM.php"+params;
 

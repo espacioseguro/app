@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.circulardialog.CDialog;
+import com.example.circulardialog.extras.CDConstants;
 import com.google.gson.Gson;
 import com.solution.tecno.seguro.Utils.SessionManager;
 import com.solution.tecno.seguro.Utils.User;
@@ -61,26 +64,45 @@ public class SharedUsersAdapter extends RecyclerView.Adapter<SharedUsersAdapter.
         holder.name.setText((String)o.get("nombre"));
         holder.itemView.setTag(o);
         holder.itemView.setOnClickListener(listener);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.trash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
-                alertDialogBuilder.setMessage("¿Está seguro de eliminar este usuario?")
-                        .setCancelable(false)
-                        .setPositiveButton("Eliminar",
-                                new DialogInterface.OnClickListener(){
-                                    public void onClick(DialogInterface dialog, int id){
-                                        deleteUser((String)o.get("id"));
-                                    }
-                                });
-                alertDialogBuilder.setNegativeButton("Cancelar",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = alertDialogBuilder.create();
-                alert.show();
+                LayoutInflater li = LayoutInflater.from(c);
+                View promptsView = li.inflate(R.layout.delete_shared_user, null);
+                android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(c);
+                alertDialogBuilder.setView(promptsView);
+                alertDialogBuilder.setCancelable(false);
+                TextView title=promptsView.findViewById(R.id.delete_name_shared_user);
+                Button delete,cancel;
+                delete=promptsView.findViewById(R.id.btn_delete_shared_user_save);
+                cancel=promptsView.findViewById(R.id.btn_delete_shared_user_cancel);
+                title.setText("¿Seguro que desea eliminar al usuario: "+holder.name.getText()+"?");
+                final android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.cancel();
+                        alertDialog.dismiss();
+                        alertDialog.hide();
+                        md=new MaterialDialog.Builder(c)
+                                .content("Eliminando")
+                                .progress(true,0)
+                                .cancelable(false)
+                                .backgroundColor(Color.WHITE)
+                                .contentColor(Color.BLACK)
+                                .show();
+                        deleteUser((String)o.get("id"));
+                    }
+                });
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.cancel();
+                        alertDialog.dismiss();
+                        alertDialog.hide();
+                    }
+                });
             }
         });
     }
@@ -112,13 +134,6 @@ public class SharedUsersAdapter extends RecyclerView.Adapter<SharedUsersAdapter.
     }
 
     public void deleteUser(String idUser) {
-        md=new MaterialDialog.Builder(c)
-                .content("Eliminando")
-                .progress(true,0)
-                .cancelable(false)
-                .backgroundColor(Color.WHITE)
-                .contentColor(Color.BLACK)
-                .show();
         RequestQueue queue = Volley.newRequestQueue(c);
         String url = "https://www.espacioseguro.pe/php_connection/deleteUser.php?user="+idUser;
 
@@ -127,8 +142,23 @@ public class SharedUsersAdapter extends RecyclerView.Adapter<SharedUsersAdapter.
                     @Override
                     public void onResponse(String response) {
                         try {
+                            md.dismiss();
                             getSharedUsers();
+                            new CDialog(c).createAlert("Usuario eliminado",
+                                    CDConstants.SUCCESS,   // Type of dialog
+                                    CDConstants.MEDIUM)    //  size of dialog
+                                    .setAnimation(CDConstants.SCALE_FROM_TOP_TO_TOP)     //  Animation for enter/exit
+                                    .setDuration(2000)   // in milliseconds
+                                    .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
+                                    .show();
                         } catch (Exception e) {
+                            new CDialog(c).createAlert("Ocurrió un error",
+                                    CDConstants.ERROR,   // Type of dialog
+                                    CDConstants.MEDIUM)    //  size of dialog
+                                    .setAnimation(CDConstants.SCALE_FROM_TOP_TO_TOP)     //  Animation for enter/exit
+                                    .setDuration(2000)   // in milliseconds
+                                    .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
+                                    .show();
                             Toast.makeText(c,"Intente luego", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                             md.dismiss();
@@ -167,9 +197,7 @@ public class SharedUsersAdapter extends RecyclerView.Adapter<SharedUsersAdapter.
                                 l.add((JSONObject)ja.get(i));
                             }
                             SharedUsersAdapter.this.notifyDataSetChanged();
-                            md.dismiss();
                         } catch (Exception e) {
-                            md.dismiss();
                             Toast.makeText(c,"Intente luego", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
