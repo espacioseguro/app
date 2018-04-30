@@ -431,7 +431,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .setPositiveButton("Guardar",
                         new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int id){
-                                updateHome(user_id,lat,lng);
+                                updateHome(u.getCod_servicio(),lat,lng);
                                 mMap.clear();
                                 int radiusM =50;
                                 int height = 80;
@@ -470,7 +470,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         alert.show();
     }
 
-    public void updateHome(final String user_id,final double lat,final double lng){
+    public void updateHome(final String service,final double lat,final double lng){
         final MaterialDialog md=new MaterialDialog.Builder(getActivity())
                 .content("Guardando..")
                 .progress(true,0)
@@ -479,7 +479,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                 .contentColor(Color.BLACK)
                 .show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        String params="?idUser="+user_id+"&lat="+lat+"&lng="+lng;
+        String params="?service="+service+"&lat="+lat+"&lng="+lng;
         String url = "https://espacioseguro.pe/php_connection/updateHome.php"+params;
 
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,

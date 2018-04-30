@@ -1,8 +1,8 @@
 package com.solution.tecno.seguro;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -83,45 +83,40 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getNameAlarm((String)o.get("id"));
-
                 LayoutInflater li = LayoutInflater.from(c);
                 View promptsView = li.inflate(R.layout.edit_dialog, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(c);
 
                 alertDialogBuilder.setView(promptsView);
-                alertDialogBuilder.setTitle("Editando alarma");
                 userInput= promptsView.findViewById(R.id.edit_name_alarm);
+                userInput.setText(holder.name.getText());
+                Button save=promptsView.findViewById(R.id.btn_alarm_name_save);
+                Button cancel=promptsView.findViewById(R.id.btn_alarm_name_cancel);
 
-
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        md=new MaterialDialog.Builder(c)
-                                                .content("Guardando")
-                                                .progress(true,0)
-                                                .cancelable(false)
-                                                .backgroundColor(Color.WHITE)
-                                                .contentColor(Color.BLACK)
-                                                .show();
-                                        updateAlarm((String)o.get("id"),userInput.getText().toString());
-                                        holder.name.setText(userInput.getText().toString());
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
+                final AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        md=new MaterialDialog.Builder(c)
+                                .content("Guardando")
+                                .progress(true,0)
+                                .cancelable(false)
+                                .backgroundColor(Color.WHITE)
+                                .contentColor(Color.BLACK)
+                                .show();
+                        updateAlarm((String)o.get("id"),userInput.getText().toString());
+                        holder.name.setText(userInput.getText().toString());
+                        alertDialog.dismiss();
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -159,9 +154,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        alertDialog.cancel();
                         alertDialog.dismiss();
-                        alertDialog.hide();
                     }
                 });
             }
@@ -191,47 +184,11 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
         }
     }
 
-    public void getNameAlarm(String idAlarm) {
-
-        RequestQueue queue = Volley.newRequestQueue(c);
-        String url = "https://www.espacioseguro.pe/php_connection/getAlarmInfo.php?idAlarma="+idAlarm;
-
-        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        JSONParser jp = new JSONParser();
-                        try {
-                            JSONArray ja=(JSONArray)jp.parse(response);
-                            for(int i=0;i<ja.size();i++){
-                                JSONObject o=(JSONObject)ja.get(i);
-                                name_alarm=(String)o.get("nombre");
-                                userInput.setText(name_alarm);
-                            }
-                        } catch (Exception e) {
-                            Toast.makeText(c,"Intente luego", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.toString());
-                        Toast.makeText(c, error.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
-        queue.add(postRequest);
-    }
-
     public void updateAlarm(String idAlarm,String name) {
 
         RequestQueue queue = Volley.newRequestQueue(c);
-        String url = "https://www.espacioseguro.pe/php_connection/updateAlarmInfo.php?idAlarma="+idAlarm+"&nombre="+name;
-
+        String url = "https://www.espacioseguro.pe/php_connection/updateAlarmInfo.php?idAlarma="+idAlarm+"&nombre="+ Uri.encode(name);
+        System.out.println(url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

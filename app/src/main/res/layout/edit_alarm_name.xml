@@ -14,12 +14,12 @@
         android:src="@drawable/escudo_lobo_negativo"/>
 
     <EditText
-        android:id="@+id/edit_name_alarm"
+        android:id="@+id/edit_alarm_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Código de Servicio"
-        android:imeOptions="actionDone"
-        android:inputType="textCapWords"
+        android:imeOptions="actionNext"
+        android:inputType="number"
         android:maxLines="1"
         android:textColorHint="#fff"
         android:singleLine="true"

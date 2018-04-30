@@ -6,38 +6,37 @@
     android:layout_height="match_parent"
     tools:context="com.solution.tecno.seguro.ServicesFragment"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_new_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_layout"
+        android:text="Nuevo Servicio"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="20dp"/>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_services"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh_services"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3sp"
-            android:layout_marginRight="3sp">
+            android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="3sp">
 
-        </android.support.v7.widget.RecyclerView>
-
+                </android.support.v7.widget.RecyclerView>
+            </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </FrameLayout>
-
-    <Button
-        android:id="@+id/btn_new_alarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_layout"
-        android:text="Nueva alarma"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btn_service_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_layout"
-        android:text="Agregar código"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="20dp"/>
 </LinearLayout>

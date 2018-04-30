@@ -14,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -68,7 +69,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         View header=navigationView.getHeaderView(0);
         tv_name= header.findViewById(R.id.header_name);
-        tv_code_service=header.findViewById(R.id.header_service_code);
 
         setUserValues(user.get(SessionManager.KEY_VALUES));
 
@@ -117,24 +117,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Gson gson=new Gson();
         User u=gson.fromJson(datos,User.class);
         tv_name.setText(u.getnombre());
-        tv_code_service.setText(u.getCod_servicio());
-        tv_code_service.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Mantén presionado para copiar",Toast.LENGTH_LONG).show();
-            }
-        });
-        tv_code_service.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("", tv_code_service.getText());
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(getApplicationContext(),"Código copiado",Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
-
     }
 
     @Override

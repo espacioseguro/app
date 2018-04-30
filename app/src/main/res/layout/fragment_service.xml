@@ -7,7 +7,7 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin"
-    tools:context="com.solution.tecno.seguro.com.solution.tecno.seguro.ServiceFragment">
+    tools:context="com.solution.tecno.seguro.ServiceFragment">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -16,22 +16,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <!--<com.jaredrummler.materialspinner.MaterialSpinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:ms_text_color="#000"
-                    android:background="@drawable/spinner_layout"
-                    />-->
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/time_array"
-                    android:prompt="@string/time_prompt"
-                    android:background="@drawable/spinner_layout"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,15 +58,81 @@
                     android:textSize="25dp"
                     android:gravity="center"/>
 
+                <RadioGroup
+                    android:id="@+id/radio_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <RadioButton
+                            android:id="@+id/radio_p75"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Plan 75"
+                            android:textColor="#000"
+                            android:checked="true"
+                            android:buttonTint="@color/verde_limon"
+                            />
+                        <ImageView
+                            android:id="@+id/tooltip_p75"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/tooltip"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_weight="1">
+                        <RadioButton
+                            android:id="@+id/radio_p50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Plan 50"
+                            android:textColor="#000"
+                            android:buttonTint="@color/verde_limon"
+                            android:checked="false"/>
+                        <ImageView
+                            android:id="@+id/tooltip_p50"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/tooltip"/>
+                    </LinearLayout>
+                </RadioGroup>
                 <Button
                     android:id="@+id/btn_culqi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_layout"
-                    android:text="SIGUIENTE"
+                    android:text="Agregar"
                     android:layout_marginLeft="45dp"
                     android:layout_marginRight="45dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+                <Button
+                    android:id="@+id/btn_list_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_layout"
+                    android:text="Ver Servicios"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
             </LinearLayout>
 
 

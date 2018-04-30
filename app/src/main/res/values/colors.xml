@@ -10,4 +10,5 @@
     <color name="disable_forground_grey">#000</color>
     <color name="disable_thumb_grey">#1c0000</color>
     <color name="enable_thumb_green">#47B</color>
+    <color name="verde_limon">#ECE65F</color>
 </resources>

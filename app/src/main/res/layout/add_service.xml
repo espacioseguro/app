@@ -14,11 +14,11 @@
         android:src="@drawable/escudo_lobo_negativo"/>
 
     <EditText
-        android:id="@+id/edit_name_alarm"
+        android:id="@+id/add_service_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Código de Servicio"
-        android:imeOptions="actionDone"
+        android:hint="Dirección"
+        android:imeOptions="actionNext"
         android:inputType="textCapWords"
         android:maxLines="1"
         android:textColorHint="#fff"
@@ -27,21 +27,36 @@
         <requestFocus />
     </EditText>
 
+    <EditText
+        android:id="@+id/add_service_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Alias (Opcional)"
+        android:imeOptions="actionDone"
+        android:inputType="textCapWords"
+        android:maxLines="1"
+        android:textColorHint="#fff"
+        android:singleLine="true"
+        android:background="@drawable/input_layout">
+    </EditText>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
         <Button
-            android:id="@+id/btn_alarm_name_save"
+            android:id="@+id/btn_save_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_layout"
             android:layout_weight="1"
-            android:text="Actualizar"/>
+            android:text="Registrar"/>
 
         <Button
-            android:id="@+id/btn_alarm_name_cancel"
+            android:id="@+id/btn_cancel_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_layout"

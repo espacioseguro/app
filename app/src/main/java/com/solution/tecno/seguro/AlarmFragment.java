@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -47,7 +48,7 @@ public class AlarmFragment extends Fragment {
     List<JSONObject> l=new ArrayList<>();
     SessionManager session;
     static MaterialDialog md;
-    Button new_alarm,add_code,save_code,cancel_code;
+    Button new_alarm,new_code,save_alarm,save_code;
     EditText service_code,alarm_code,alarm_name,alarm_service_code;
     User u;
     SwipeRefreshLayout srefresh;
@@ -105,42 +106,47 @@ public class AlarmFragment extends Fragment {
             }
         });
 
-        add_code=view.findViewById(R.id.btn_service_code);
-        add_code.setOnClickListener(new View.OnClickListener() {
+        new_code=view.findViewById(R.id.btn_service_code);
+        new_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutInflater li = LayoutInflater.from(getContext());
+                LayoutInflater li = LayoutInflater.from(getActivity());
                 View promptsView = li.inflate(R.layout.add_code, null);
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+                alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
                 alertDialogBuilder.setView(promptsView);
-                alertDialogBuilder.setTitle("Código de Servicio");
-                service_code= promptsView.findViewById(R.id.add_service_code);
+                alertDialog = alertDialogBuilder.create();
 
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        md=new MaterialDialog.Builder(getContext())
-                                                .content("Enviando Solicitud")
-                                                .progress(true,0)
-                                                .cancelable(false)
-                                                .backgroundColor(Color.WHITE)
-                                                .contentColor(Color.BLACK)
-                                                .titleColor(Color.RED)
-                                                .show();
-                                        addServiceCode(u.getId(),service_code.getText().toString());
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                service_code= promptsView.findViewById(R.id.add_service_code);
+                save_code=promptsView.findViewById(R.id.btn_new_code_save);
+
+                alertDialogBuilder.show();
+                save_code.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (service_code.getText().toString().equals("")) {
+                            cDialog=new CDialog(getContext()).createAlert("Ingrese un Código de Servicio",
+                                    CDConstants.WARNING,   // Type of dialog
+                                    CDConstants.MEDIUM)    //  size of dialog
+                                    .setAnimation(CDConstants.SCALE_FROM_TOP_TO_TOP)     //  Animation for enter/exit
+                                    .setDuration(2000)   // in milliseconds
+                                    .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
+                                    .setPosition(CDConstants.CENTER);
+                            cDialog.show();
+                        } else {
+                            md=new MaterialDialog.Builder(getContext())
+                                    .content("Enviando Solicitud")
+                                    .progress(true,0)
+                                    .cancelable(false)
+                                    .backgroundColor(Color.WHITE)
+                                    .contentColor(Color.BLACK)
+                                    .titleColor(Color.RED)
+                                    .show();
+                            addServiceCode(u.getId(),service_code.getText().toString());
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
             }
         });
 
@@ -157,35 +163,35 @@ public class AlarmFragment extends Fragment {
                 alarm_code= promptsView.findViewById(R.id.add_new_alarm);
                 alarm_name=promptsView.findViewById(R.id.add_new_alarm_name);
                 alarm_service_code=promptsView.findViewById(R.id.add_new_service);
-                save_code=promptsView.findViewById(R.id.btn_new_alarm_save);
-                cancel_code=promptsView.findViewById(R.id.btn_new_alarm_cancel);
+                save_alarm=promptsView.findViewById(R.id.btn_new_alarm_save);
 
                 alarm_service_code.setText(u.getCod_servicio());
                 alertDialog.show();
 
-                save_code.setOnClickListener(new View.OnClickListener() {
+                save_alarm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        md=new MaterialDialog.Builder(getContext())
-                                .content("Guardando")
-                                .progress(true,0)
-                                .cancelable(true)
-                                .backgroundColor(Color.WHITE)
-                                .contentColor(Color.BLACK)
-                                .titleColor(Color.RED)
-                                .show();
-                        addAlarm(alarm_code.getText().toString(),alarm_name.getText().toString());
-                        alertDialog.hide();
-                        alertDialog.dismiss();
-                        alertDialog.cancel();
-                    }
-                });
-
-                cancel_code.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-                        alertDialog.cancel();
+                        if(alarm_code.getText().toString().equals("") || alarm_name.getText().toString().equals("")){
+                            cDialog=new CDialog(getContext()).createAlert("Completa todos los campos",
+                                    CDConstants.WARNING,   // Type of dialog
+                                    CDConstants.MEDIUM)    //  size of dialog
+                                    .setAnimation(CDConstants.SCALE_FROM_TOP_TO_TOP)     //  Animation for enter/exit
+                                    .setDuration(2000)   // in milliseconds
+                                    .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
+                                    .setPosition(CDConstants.CENTER);
+                            cDialog.show();
+                        }else{
+                            md=new MaterialDialog.Builder(getContext())
+                                    .content("Guardando")
+                                    .progress(true,0)
+                                    .cancelable(true)
+                                    .backgroundColor(Color.WHITE)
+                                    .contentColor(Color.BLACK)
+                                    .titleColor(Color.RED)
+                                    .show();
+                            addAlarm(alarm_code.getText().toString(),alarm_name.getText().toString());
+                            alertDialog.dismiss();
+                        }
                     }
                 });
             }
@@ -219,7 +225,6 @@ public class AlarmFragment extends Fragment {
                     .backgroundColor(Color.WHITE)
                     .contentColor(Color.BLACK)
                     .show();
-
         }
 
         @Override
@@ -295,50 +300,7 @@ public class AlarmFragment extends Fragment {
         queue.add(postRequest);
     }
 
-    public void validateCode(final String idUser, final String service_code){
-        md.show();
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = "https://www.espacioseguro.pe/php_connection/validateCode.php?code="+service_code+"&user="+idUser;
-        System.out.println("url: "+url);
-
-        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        JSONParser p=new JSONParser();
-
-                        try {
-                            org.json.simple.JSONArray a=(org.json.simple.JSONArray)p.parse(response);
-                            org.json.simple.JSONObject o=(org.json.simple.JSONObject)a.get(0);
-                            if(o.get("contador")=="0"){
-                                addServiceCode(idUser,service_code);
-                            }else{
-                                Toast.makeText(getContext(),"Código ya registrado",Toast.LENGTH_SHORT).show();
-                                md.dismiss();
-                            }
-
-                        } catch (Exception e) {
-                            md.dismiss();
-                            Toast.makeText(getContext(),"Intente luego", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                        md.dismiss();
-                    }
-                }
-        );
-        queue.add(postRequest);
-    }
-
-    public void addServiceCode(String idUser,String service_code){
-        System.out.println("idUser: "+idUser);
-        System.out.println("service_code: "+service_code);
+    public void addServiceCode(String idUser,final String service_code){
         md.show();
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = "https://www.espacioseguro.pe/php_connection/sendRequest.php?code="+service_code+"&idUser="+idUser;
@@ -350,6 +312,7 @@ public class AlarmFragment extends Fragment {
                     public void onResponse(String response) {
                         // response
                         try {
+                            md.dismiss();
                             cDialog=new CDialog(getContext()).createAlert("Listo",
                                     CDConstants.SUCCESS,   // Type of dialog
                                     CDConstants.MEDIUM)    //  size of dialog
@@ -357,6 +320,10 @@ public class AlarmFragment extends Fragment {
                                     .setDuration(2000)   // in milliseconds
                                     .setTextSize(CDConstants.NORMAL_TEXT_SIZE);
                             cDialog.show();
+                            NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
+                            View header=navigationView.getHeaderView(0);
+                            EditText tv_code_service=header.findViewById(R.id.header_service_code);
+                            tv_code_service.setText(service_code);
                             loginRequest(u.getcorreo(),u.getClave());
                         } catch (Exception e) {
                             md.dismiss();
@@ -384,7 +351,7 @@ public class AlarmFragment extends Fragment {
     }
 
     public void loginRequest(final String email,final String psw){
-        RequestQueue queue = Volley.newRequestQueue(getContext());
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
         String params="?usuario="+email+"&psw="+psw;
         String url = "https://espacioseguro.pe/php_connection/login.php"+params;
 
@@ -446,7 +413,6 @@ public class AlarmFragment extends Fragment {
                     public void onResponse(String response) {
                         // response
                         try {
-                            alertDialog.hide();
                             md.dismiss();
                             cDialog=new CDialog(getContext()).createAlert("Listo",
                                     CDConstants.SUCCESS,   // Type of dialog

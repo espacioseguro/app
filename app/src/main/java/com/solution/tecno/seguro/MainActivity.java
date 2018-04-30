@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
 
     SessionManager session;
     private String result="";
-    public static int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    public static int MY_PERMISSIONS_REQUEST_ACCESS= 1;
     ImageView logo;
     TextView name;
 
@@ -47,21 +47,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void checkPermissions(){
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-            } else {
+        if (
+                ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+            )
+        {
                 ActivityCompat.requestPermissions(this,
                         new String[]{
                                 Manifest.permission.ACCESS_FINE_LOCATION,
-                                Manifest.permission.BLUETOOTH_PRIVILEGED,
                                 Manifest.permission.INTERNET,
                                 Manifest.permission.CAMERA
                         },
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-            }
+                        MY_PERMISSIONS_REQUEST_ACCESS);
         }else{
             validateSession();
         }
