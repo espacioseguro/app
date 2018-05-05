@@ -4,17 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.solution.tecno.seguro.AlarmFragment"
-    android:orientation="vertical">
+    tools:context=".AlarmFragment"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_escudo">
     <Button
-        android:id="@+id/btn_new_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_layout"
         android:text="Nueva alarma"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/btn_new_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nueva_alarma"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar nueva alarma"
+            android:gravity="center"
+            android:textColor="#3F77BE"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_service_code"
@@ -28,23 +48,33 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v4.widget.SwipeRefreshLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/swiperefresh_alarm"
-            android:layout_marginTop="16dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ScrollView
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_alarm"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconoalarmaazul"/>
+            <android.support.v4.widget.SwipeRefreshLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/swiperefresh_alarm"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3sp"
-                    android:layout_marginRight="3sp">
-                </android.support.v7.widget.RecyclerView>
-            </ScrollView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+                    android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_alarm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3sp"
+                        android:layout_marginRight="3sp">
+                    </android.support.v7.widget.RecyclerView>
+                </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.solution.tecno.seguro">
+    package="com.espacio.seguro">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -30,7 +30,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.solution.tecno.seguro.MainActivity">
+        <activity android:name="com.espacio.seguro.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,10 +38,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.solution.tecno.seguro.LoginActivity"
+            android:name="com.espacio.seguro.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
-            android:name="com.solution.tecno.seguro.HomeActivity"
+            android:name="com.espacio.seguro.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -60,7 +60,7 @@
             android:authorities="com.facebook.app.FacebookContentProvider709592505908470"
             android:exported="true" />
 
-        <receiver android:name="com.solution.tecno.seguro.BatteryReceiver">
+        <receiver android:name="com.espacio.seguro.BatteryReceiver">
             <intent-filter>
                 <action android:name="com.example.SendBroadcast" />
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
@@ -69,23 +69,23 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.solution.tecno.seguro.RegisterActivity" />
-        <activity android:name="com.solution.tecno.seguro.CulqiActivity" />
+        <activity android:name="com.espacio.seguro.RegisterActivity" />
+        <activity android:name="com.espacio.seguro.CulqiActivity" />
 
-        <service android:name=".Firebase.MyFirebaseInstanceIdService">
+        <service android:name="com.espacio.seguro.Firebase.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".Firebase.MyFirebaseMessagingService">
+        <service android:name="com.espacio.seguro.Firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name="com.solution.tecno.seguro.EditAlarmActivity" />
+        <activity android:name="com.espacio.seguro.EditAlarmActivity" />
         <activity
-            android:name="com.solution.tecno.seguro.Home2Activity"
+            android:name="com.espacio.seguro.Home2Activity"
             android:label="@string/title_activity_home2"></activity>
     </application>
 

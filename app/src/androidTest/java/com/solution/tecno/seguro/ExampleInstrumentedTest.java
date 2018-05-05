@@ -1,4 +1,4 @@
-package com.solution.tecno.seguro;
+package com.espacio.seguro;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

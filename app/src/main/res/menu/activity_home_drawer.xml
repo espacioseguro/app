@@ -6,58 +6,45 @@
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_maps"
-            android:icon="@drawable/map"
-            android:title="Mapa"
-            android:iconTint="#000"
-            />
+            android:icon="@drawable/map_blue"
+
+            android:title="Mapa"/>
 
         <item
             android:id="@+id/nav_service"
-            android:icon="@drawable/turn_on"
-            android:title="Activar servicio"
-            android:iconTint="#000"/>
+            android:icon="@drawable/turn_on_blue"
+            android:title="Activar servicio"/>
 
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/menu_notification"
-            android:title="Notificaciones"
-            android:iconTint="#000"/>
+            android:icon="@drawable/menu_notification_blue"
+            android:title="Notificaciones"/>
 
         <item
             android:id="@+id/nav_alarm"
-            android:icon="@drawable/home_alarm"
-            android:title="Alarmas"
-            android:iconTint="#000"/>
+            android:icon="@drawable/home_alarm_blue"
+            android:title="Alarmas"/>
 
         <item
             android:id="@+id/nav_shared_users"
-            android:icon="@drawable/shared_users"
-            android:title="Usuarios compartidos"
-            android:iconTint="#000"/>
+            android:icon="@drawable/shared_users_blue"
+            android:title="Usuarios compartidos"/>
 
         <item
             android:id="@+id/nav_services"
-            android:icon="@drawable/service"
-            android:title="Mis Servicios"
-            android:iconTint="#000"/>
+            android:icon="@drawable/service_blue"
+            android:title="Mis Servicios"/>
 
         <item
             android:id="@+id/nav_request"
-            android:icon="@drawable/request_icon"
-            android:title="Solicitudes"
-            android:iconTint="#000"/>
-
-        <item
-            android:id="@+id/nav_home"
-            android:title="Home2"
-            android:iconTint="#000"/>
+            android:icon="@drawable/request_icon_blue"
+            android:title="Solicitudes"/>
     </group>
 
     <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
-            android:title="Cerrar Sesión"
-            android:iconTint="#000"/>
+            android:icon="@drawable/logout_blue"
+            android:title="Cerrar Sesión"/>
     </group>
 </menu>

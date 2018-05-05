@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.solution.tecno.seguro.MapsFragment"
-    android:orientation="vertical">
+    tools:context=".MapsFragment"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_escudo">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.solution.tecno.seguro.ConfigurationFragment"
+        tools:context=".ConfigurationFragment"
         android:orientation="vertical">
         <ScrollView
             android:id="@+id/scrollView1"

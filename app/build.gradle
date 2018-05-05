@@ -3,18 +3,27 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.solution.tecno.espacioseguro"
+        applicationId "com.espacio.seguro"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 9
-        versionName "9"
+        versionCode 16
+        versionName "16"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+    signingConfigs {
+        release {
+            storeFile file("espacio_seguro.jks")
+            storePassword "*451300*"
+            keyAlias "key_seguro"
+            keyPassword "*451300*"
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }

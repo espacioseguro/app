@@ -8,6 +8,37 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1038908979757:android:190f55085491cf60",
+        "android_client_info": {
+          "package_name": "com.espacio.seguro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038908979757-l16dvbvthj1m9moun9ccqqmkdenuqg72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2s-zxAZ0idqTnhE1_PT28REhmTZOFijA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1038908979757:android:89072ad601400769",
         "android_client_info": {
           "package_name": "com.solution.tecno.espacioseguro"
@@ -39,6 +70,13 @@
         "appinvite_service": {
           "status": 2,
           "other_platform_oauth_client": [
+            {
+              "client_id": "1038908979757-k4fbqq1ok2855v2kjfqntubdnu8hm420.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.espacio.seguro"
+              }
+            },
             {
               "client_id": "1038908979757-l16dvbvthj1m9moun9ccqqmkdenuqg72.apps.googleusercontent.com",
               "client_type": 3

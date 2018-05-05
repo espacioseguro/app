@@ -61,4 +61,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="forgot_password"><u>OLVIDÉ MI CLAVE</u>.</string>
+    <string name="register_text">¿AÚN NO TIENES CUENTA? <u>REGÍSTRATE</u>.</string>
+    <string name="information">Deseo recibir información y promociones</string>
+    <string name="termn_condition">He leído y acepto los <u>términos y condiciones</u></string>
+
 </resources>
