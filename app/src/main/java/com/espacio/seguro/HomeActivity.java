@@ -48,6 +48,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         FirebaseApp.initializeApp(getApplicationContext());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -73,17 +75,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void initializeUserData(){
         session=new SessionManager(getApplicationContext());
-        HashMap<String,String> user=session.getUserDetails();
-        Gson g=new Gson();
-        u=g.fromJson(user.get(SessionManager.KEY_VALUES),User.class);
-        setUserValues(user.get(SessionManager.KEY_VALUES));
+        if(session.isLoggedIn()){
+            HashMap<String,String> user=session.getUserDetails();
+            Gson g=new Gson();
+            u=g.fromJson(user.get(SessionManager.KEY_VALUES),User.class);
+            setUserValues(user.get(SessionManager.KEY_VALUES));
 
-        name_profile=findViewById(R.id.name_profile);
-        service_name=findViewById(R.id.service_profile);
-        name_profile.setText(u.getnombre());
-        service_name.setText(u.getName_servicio());
-        name_profile.setTypeface(null, Typeface.BOLD);
-        service_name.setTypeface(null, Typeface.BOLD);
+            name_profile=findViewById(R.id.name_profile);
+            service_name=findViewById(R.id.service_profile);
+            name_profile.setText(u.getnombre());
+            service_name.setText(u.getName_servicio());
+            name_profile.setTypeface(null, Typeface.BOLD);
+            service_name.setTypeface(null, Typeface.BOLD);
+        }else{
+            session.checkLogin();
+        }
     }
 
     private void initializeFragment(){

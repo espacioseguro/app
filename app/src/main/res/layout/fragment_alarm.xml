@@ -17,64 +17,148 @@
         android:layout_marginTop="20dp"
         android:visibility="gone"/>
     <LinearLayout
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
-        <ImageView
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:id="@+id/btn_new_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/nueva_alarma"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrar nueva alarma"
-            android:gravity="center"
-            android:textColor="#3F77BE"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_service_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_layout"
-        android:text="Agregar código"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="20dp"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
         <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
             <ImageView
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/btn_new_alarm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/iconoalarmaazul"/>
-            <android.support.v4.widget.SwipeRefreshLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/swiperefresh_alarm"
-                android:layout_marginTop="16dp"
+                android:src="@drawable/nueva_alarma"/>
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ScrollView
+                android:layout_height="wrap_content"
+                android:text="Registrar nueva alarma"
+                android:gravity="center"
+                android:textColor="#3F77BE"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/btn_service_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nueva_alarma"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vincular Servicio"
+                android:gravity="center"
+                android:textColor="#3F77BE"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_entrar"
+        android:text="Vincular Código de Servicio"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recycler_view_alarm"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/turn_off_alarms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/turn_off"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Apagar Todo"
+                            android:gravity="center"
+                            android:textColor="@color/red_app"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="3sp"
-                        android:layout_marginRight="3sp">
-                    </android.support.v7.widget.RecyclerView>
-                </ScrollView>
-            </android.support.v4.widget.SwipeRefreshLayout>
+                        android:src="@drawable/iconoalarmaazul"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/turn_on_alarms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/turn_off"
+                            android:tint="@color/green_app"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Encender Todo"
+                            android:gravity="center"
+                            android:textColor="@color/green_app"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <android.support.v4.widget.SwipeRefreshLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/swiperefresh_alarm"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view_alarm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3sp"
+                            android:layout_marginRight="3sp">
+                        </android.support.v7.widget.RecyclerView>
+                    </ScrollView>
+                </android.support.v4.widget.SwipeRefreshLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

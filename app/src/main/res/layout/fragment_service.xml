@@ -68,7 +68,8 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:visibility="gone">
                         <RadioButton
                             android:id="@+id/radio_p75"
                             android:layout_width="match_parent"
@@ -76,7 +77,6 @@
                             android:layout_weight="1"
                             android:text="Plan 75"
                             android:textColor="#000"
-                            android:checked="true"
                             android:buttonTint="#3F77BE"
                             />
                         <ImageView
@@ -99,9 +99,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Plan 50"
+                            android:checked="true"
                             android:textColor="#000"
-                            android:buttonTint="#3F77BE"
-                            android:checked="false"/>
+                            android:buttonTint="@color/azul_app"/>
                         <ImageView
                             android:id="@+id/tooltip_p50"
                             android:layout_width="match_parent"
@@ -116,8 +116,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_entrar"
                     android:text="Agregar"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginRight="45dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
                     android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
                 <Button
@@ -126,15 +127,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_entrar"
                     android:text="Ver Servicios"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginRight="45dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
                     android:layout_marginTop="@dimen/activity_vertical_margin"/>
-
             </LinearLayout>
-
-
-
         </ScrollView>
-
-
 </LinearLayout>

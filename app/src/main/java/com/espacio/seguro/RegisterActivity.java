@@ -13,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -23,28 +22,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.AccessToken;
-import com.facebook.AccessTokenTracker;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.gson.Gson;
 import com.espacio.seguro.Utils.SessionManager;
 import com.espacio.seguro.Utils.User;
-import com.espacio.seguro.R;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -85,10 +70,8 @@ public class RegisterActivity extends AppCompatActivity{
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     terms_val=1;
-                    Toast.makeText(context,"terms_checked "+terms_val,Toast.LENGTH_SHORT).show();
                 }else{
                     terms_val=0;
-                    Toast.makeText(context,"terms_unchecked "+terms_val,Toast.LENGTH_SHORT).show();
                 }
             }
         });

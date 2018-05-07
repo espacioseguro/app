@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_maps"
             android:icon="@drawable/map_blue"
-
+            android:visible="false"
             android:title="Mapa"/>
 
         <item

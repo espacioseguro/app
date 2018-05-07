@@ -49,8 +49,8 @@ public class AlarmFragment extends Fragment {
     List<JSONObject> l=new ArrayList<>();
     SessionManager session;
     static MaterialDialog md;
-    Button new_code,save_alarm,save_code;
-    ImageView new_alarm;
+    Button save_alarm,save_code,cancel_alarm,cancel_code;
+    ImageView new_alarm,new_code,turn_off_all_alarms,turn_on_all_alarms;
     EditText service_code,alarm_code,alarm_name,alarm_service_code;
     User u;
     SwipeRefreshLayout srefresh;
@@ -94,20 +94,37 @@ public class AlarmFragment extends Fragment {
         });
 
         activity.setAdapter(adapter);
-        adapter.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                JSONObject alarm=(JSONObject)view.getTag();
-                String status=(String)alarm.get("estado");
-                String id=(String)alarm.get("id");
-                if(status.equals("0")){
-                    status="1";
-                }else{
-                    status="0";
-                }
-                enableAlarm(id,status);
+        turn_off_all_alarms=view.findViewById(R.id.turn_off_alarms);
+        turn_off_all_alarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                md=new MaterialDialog.Builder(getContext())
+                        .content("Apagando alarmas")
+                        .progress(true,0)
+                        .cancelable(false)
+                        .backgroundColor(Color.WHITE)
+                        .contentColor(Color.BLACK)
+                        .titleColor(Color.RED)
+                        .show();
+                disableAlarms();
             }
         });
 
+        turn_on_all_alarms=view.findViewById(R.id.turn_on_alarms);
+        turn_on_all_alarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                md=new MaterialDialog.Builder(getContext())
+                        .content("Encendiendo alarmas")
+                        .progress(true,0)
+                        .cancelable(false)
+                        .backgroundColor(Color.WHITE)
+                        .contentColor(Color.BLACK)
+                        .titleColor(Color.RED)
+                        .show();
+                enableAlarms();
+            }
+        });
         new_code=view.findViewById(R.id.btn_service_code);
         new_code.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +139,9 @@ public class AlarmFragment extends Fragment {
                 service_code= promptsView.findViewById(R.id.add_service_code);
                 save_code=promptsView.findViewById(R.id.btn_new_code_save);
 
-                alertDialogBuilder.show();
+                cancel_code=promptsView.findViewById(R.id.btn_new_code_cancel);
+
+                alertDialog.show();
                 save_code.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -149,6 +168,13 @@ public class AlarmFragment extends Fragment {
                         }
                     }
                 });
+
+                cancel_code.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -166,10 +192,16 @@ public class AlarmFragment extends Fragment {
                 alarm_name=promptsView.findViewById(R.id.add_new_alarm_name);
                 alarm_service_code=promptsView.findViewById(R.id.add_new_service);
                 save_alarm=promptsView.findViewById(R.id.btn_new_alarm_save);
+                cancel_alarm=promptsView.findViewById(R.id.btn_new_alarm_cancel);
 
                 alarm_service_code.setText(u.getCod_servicio());
                 alertDialog.show();
-
+                cancel_alarm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
                 save_alarm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -253,6 +285,7 @@ public class AlarmFragment extends Fragment {
                             }
                             srefresh.setRefreshing(false);
                             adapter.notifyDataSetChanged();
+                            md.dismiss();
                         } catch (Exception e) {
                             Toast.makeText(getContext(),"Intente luego", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
@@ -302,6 +335,64 @@ public class AlarmFragment extends Fragment {
         queue.add(postRequest);
     }
 
+    public void disableAlarms(){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://www.espacioseguro.pe/php_connection/disableAlarms.php?idService="+u.getCod_servicio();
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        try {
+                            getAlarms(u.getCod_servicio());
+                        } catch (Exception e) {
+                            md.dismiss();
+                            Toast.makeText(getContext(),"Intente luego", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        md.dismiss();
+                    }
+                }
+        );
+        queue.add(postRequest);
+    }
+
+    public void enableAlarms(){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "https://www.espacioseguro.pe/php_connection/enableAlarms.php?idService="+u.getCod_servicio();
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        try {
+                            getAlarms(u.getCod_servicio());
+                        } catch (Exception e) {
+                            md.dismiss();
+                            Toast.makeText(getContext(),"Intente luego", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        md.dismiss();
+                    }
+                }
+        );
+        queue.add(postRequest);
+    }
+
     public void addServiceCode(String idUser,final String service_code){
         md.show();
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -324,8 +415,7 @@ public class AlarmFragment extends Fragment {
                             cDialog.show();
                             NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
                             View header=navigationView.getHeaderView(0);
-                            EditText tv_code_service=header.findViewById(R.id.header_service_code);
-                            tv_code_service.setText(service_code);
+                            ((HomeActivity)getContext()).updateService(u.getName_servicio());
                             loginRequest(u.getcorreo(),u.getClave());
                         } catch (Exception e) {
                             md.dismiss();

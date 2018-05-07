@@ -13,9 +13,12 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 
 import com.espacio.seguro.HomeActivity;
+import com.espacio.seguro.MainActivity;
 import com.espacio.seguro.R;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Julian on 25/02/2018.
@@ -37,7 +40,7 @@ public class MyNotificationManager {
         return mInstance;
     }
 
-    public void displayNotification(String body) {
+    public void displayNotification(String body,String title) {
         Random random=new Random();
         int notificationId=random.nextInt();
         Vibrator v = (Vibrator)mCtx.getSystemService(Context.VIBRATOR_SERVICE);
@@ -45,21 +48,22 @@ public class MyNotificationManager {
         // Each element then alternates between vibrate, sleep, vibrate, sleep...
         long[] pattern = {0, 500, 250, 500, 250,500, 250};
 
-        AudioManager am=(AudioManager)mCtx.getSystemService(Context.AUDIO_SERVICE);
+        final AudioManager am=(AudioManager)mCtx.getSystemService(Context.AUDIO_SERVICE);
+        final int ring_mode=am.getRingerMode();
         am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         am.setStreamVolume(AudioManager.STREAM_NOTIFICATION,am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION),0);
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
-        Intent intent = new Intent(mCtx, HomeActivity.class);
+        Intent intent = new Intent(mCtx, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder mBuilder;
         mBuilder = new NotificationCompat.Builder(mCtx);
-        mBuilder.setSmallIcon(R.drawable.logo_positivo);
-        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.logo_positivo));
-        mBuilder.setContentTitle("Espacio Seguro");
+        mBuilder.setSmallIcon(R.drawable.logo_blue);
+        mBuilder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.logo_blue));
+        mBuilder.setContentTitle(title);
         mBuilder.setContentText(body);
         mBuilder.setSound(notification);
         mBuilder.setContentIntent(pendingIntent);
@@ -73,5 +77,13 @@ public class MyNotificationManager {
         if (nm != null) {
             nm.notify(notificationId, mBuilder.build());
         }
+
+        Timer t=new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                am.setRingerMode(ring_mode);
+            }
+        },3000);
     }
 }

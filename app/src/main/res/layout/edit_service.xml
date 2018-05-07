@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/fondo_pop_up"
+    android:background="@drawable/fondo_pop_up_alarma"
     android:gravity="center"
     android:padding="10dp" >
 
@@ -36,16 +36,18 @@
             android:id="@+id/btn_service_name_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/btn_blanco"
             android:layout_weight="1"
+            android:textColor="@color/azul_app"
             android:text="Actualizar"/>
 
         <Button
             android:id="@+id/btn_service_name_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/btn_blanco"
             android:layout_weight="1"
+            android:textColor="@color/azul_app"
             android:text="Cancelar"/>
     </LinearLayout>
 </LinearLayout>

@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:background="#46d846"
+            android:background="@drawable/button_entrar"
+            android:tint="#fff"
             android:src="@drawable/accept_request" />
 
         <ImageView
@@ -39,7 +40,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:background="#fd2b2b"
+            android:background="@drawable/button_entrar"
+            android:tint="#fff"
             android:src="@drawable/delete_request" />
 
     </LinearLayout>

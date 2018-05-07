@@ -11,10 +11,11 @@
         android:id="@+id/btn_new_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_layout"
+        android:background="@drawable/button_entrar"
         android:text="Nuevo Servicio"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
+        android:gravity="center"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
         android:layout_marginTop="20dp"/>
     <FrameLayout
         android:layout_width="match_parent"

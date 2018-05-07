@@ -40,6 +40,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.circulardialog.CDialog;
+import com.example.circulardialog.extras.CDConstants;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -336,7 +338,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
                     mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                     mNotificationManager.createNotificationChannel(mChannel);
                 }
-                MyNotificationManager.getInstance(getActivity()).displayNotification("Batería baja!\nServicio desactivado");
+                MyNotificationManager.getInstance(getActivity()).displayNotification("Servicio desactivado","Batería Baja");
             }else{
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 400, 1000, new LocationListener() {
                     @Override
@@ -424,51 +426,62 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void showLocationConfirmation(final String user_id,final double lat,final double lng){
-        u.setLat(String.valueOf(lat));
-        u.setLng(String.valueOf(lng));
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("¿Está seguro de guardar esta ubicación?")
-                .setCancelable(false)
-                .setPositiveButton("Guardar",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
-                                updateHome(u.getCod_servicio(),lat,lng);
-                                mMap.clear();
-                                int radiusM =50;
-                                int height = 80;
-                                int width = 50;
-                                int d = 500; // diameter
-                                Bitmap bm = Bitmap.createBitmap(d, d, Bitmap.Config.ARGB_8888);
-                                Canvas c = new Canvas(bm);
-                                Paint p = new Paint();
-                                p.setColor(getResources().getColor(R.color.colorAccent));
-                                c.drawCircle(d/2, d/2, d/2, p);
-                                // generate BitmapDescriptor from circle Bitmap
-                                BitmapDescriptor bmD = BitmapDescriptorFactory.fromBitmap(bm);
-                                BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.house_icon);
-                                Bitmap b=bitmapdraw.getBitmap();
-                                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
-                                LatLng location=new LatLng(Double.parseDouble(u.getLat()),Double.parseDouble(u.getLng()));
-                                mMap.addMarker(new MarkerOptions()
-                                        .position(location)
-                                        .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
-                                        .draggable(true)
-                                );
-                                mMap.addGroundOverlay(new GroundOverlayOptions().
-                                        image(bmD).
-                                        position(location,radiusM*2,radiusM*2).
-                                        transparency(0.7f));
+        if(u.getCod_servicio()=="Sin Servicio"){
+            new CDialog(getActivity()).createAlert("Debe tener un servicio asociado antes de continuar",
+                    CDConstants.WARNING,   // Type of dialog
+                    CDConstants.MEDIUM)    //  size of dialog
+                    .setAnimation(CDConstants.SCALE_FROM_BOTTOM_TO_TOP)     //  Animation for enter/exit
+                    .setDuration(2000)   // in milliseconds
+                    .setTextSize(CDConstants.NORMAL_TEXT_SIZE)
+                    .show();
+        }else{
 
-                            }
-                        });
-        alertDialogBuilder.setNegativeButton("No",
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+            u.setLat(String.valueOf(lat));
+            u.setLng(String.valueOf(lng));
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setMessage("¿Está seguro de guardar esta ubicación?")
+                    .setCancelable(false)
+                    .setPositiveButton("Guardar",
+                            new DialogInterface.OnClickListener(){
+                                public void onClick(DialogInterface dialog, int id){
+                                    updateHome(u.getCod_servicio(),lat,lng);
+                                    mMap.clear();
+                                    int radiusM =50;
+                                    int height = 80;
+                                    int width = 50;
+                                    int d = 500; // diameter
+                                    Bitmap bm = Bitmap.createBitmap(d, d, Bitmap.Config.ARGB_8888);
+                                    Canvas c = new Canvas(bm);
+                                    Paint p = new Paint();
+                                    p.setColor(getResources().getColor(R.color.colorAccent));
+                                    c.drawCircle(d/2, d/2, d/2, p);
+                                    // generate BitmapDescriptor from circle Bitmap
+                                    BitmapDescriptor bmD = BitmapDescriptorFactory.fromBitmap(bm);
+                                    BitmapDrawable bitmapdraw=(BitmapDrawable)getResources().getDrawable(R.drawable.house_icon);
+                                    Bitmap b=bitmapdraw.getBitmap();
+                                    Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                                    LatLng location=new LatLng(Double.parseDouble(u.getLat()),Double.parseDouble(u.getLng()));
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(location)
+                                            .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                                            .draggable(true)
+                                    );
+                                    mMap.addGroundOverlay(new GroundOverlayOptions().
+                                            image(bmD).
+                                            position(location,radiusM*2,radiusM*2).
+                                            transparency(0.7f));
+
+                                }
+                            });
+            alertDialogBuilder.setNegativeButton("No",
+                    new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int id){
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
+        }
     }
 
     public void updateHome(final String service,final double lat,final double lng){

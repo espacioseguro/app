@@ -34,7 +34,8 @@
                 android:id="@+id/item_shared_trash"
                 android:layout_gravity="left"
                 android:layout_weight="1"
-                android:src="@drawable/delete_user"/>
+                android:src="@drawable/delete_user"
+                android:tint="#fff"/>
 
         </LinearLayout>
     </LinearLayout>

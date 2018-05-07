@@ -6,8 +6,8 @@ android {
         applicationId "com.espacio.seguro"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 16
-        versionName "16"
+        versionCode 20
+        versionName "20"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

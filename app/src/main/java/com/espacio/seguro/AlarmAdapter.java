@@ -1,6 +1,7 @@
 package com.espacio.seguro;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.espacio.seguro.Firebase.MyNotificationManager;
 import com.example.circulardialog.CDialog;
 import com.example.circulardialog.extras.CDConstants;
 import com.google.gson.Gson;
@@ -72,12 +74,18 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final JSONObject o=l.get(position);
         holder.name.setText((String)o.get("nombre"));
-        holder.code.setText((String)o.get("codProd"));
+        String battery=(String)o.get("nivel_bateria");
+        holder.battery.setText("Bat: "+battery+"%");
 
         if(o.get("estado").equals("0")){
-            holder.itemView.setBackgroundColor(Color.parseColor("#fb1a01"));
+//            holder.itemView.setBackgroundColor(Color.parseColor("#fb1a01"));
+            holder.btn_alarm.setImageResource(R.drawable.turn_off);
+            holder.btn_alarm.setImageTintList(ColorStateList.valueOf(c.getResources().getColor(R.color.green_app)));
         }else{
-            holder.itemView.setBackgroundColor(Color.parseColor("#00a947"));
+//            holder.itemView.setBackgroundColor(Color.parseColor("#00a947"));
+            holder.btn_alarm.setImageResource(R.drawable.turn_off);
+            holder.btn_alarm.setImageTintList(ColorStateList.valueOf(c.getResources().getColor(R.color.red_app)));
+
         }
         holder.itemView.setTag(o);
         holder.itemView.setOnClickListener(listener);
@@ -173,15 +181,16 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView name,code;
-        ImageView edit,delete;
+        TextView name,battery;
+        ImageView edit,delete,btn_alarm;
 
         private ViewHolder(View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.item_alarm_name);
-            code=itemView.findViewById(R.id.item_alarm_code);
             edit=itemView.findViewById(R.id.item_alarm_edit);
             delete=itemView.findViewById(R.id.item_alarm_delete);
+            btn_alarm=itemView.findViewById(R.id.btn_alarm);
+            battery=itemView.findViewById(R.id.item_alarm_battery);
         }
     }
 

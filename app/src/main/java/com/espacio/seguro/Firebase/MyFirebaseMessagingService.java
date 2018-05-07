@@ -29,6 +29,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //getting the title and the body
         //String title = remoteMessage.getNotification().getTitle();
         String body = remoteMessage.getData().get("body");
+        String title= remoteMessage.getData().get("title");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationManager mNotificationManager =
@@ -44,7 +45,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             mNotificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
         }
 
-        MyNotificationManager.getInstance(getApplicationContext()).displayNotification(body);
+        MyNotificationManager.getInstance(getApplicationContext()).displayNotification(body,title);
     }
 
     @Override
