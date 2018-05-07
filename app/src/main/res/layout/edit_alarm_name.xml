@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/fondo_pop_up"
+    android:background="@drawable/fondo_pop_up_alarma"
     android:gravity="center"
     android:padding="10dp" >
 
@@ -15,7 +15,7 @@
 
     <EditText
         android:id="@+id/edit_alarm_name"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Código de Servicio"
         android:imeOptions="actionNext"
@@ -23,20 +23,22 @@
         android:maxLines="1"
         android:textColorHint="#fff"
         android:singleLine="true"
-        android:background="@drawable/input_layout">
+        android:background="@drawable/input_layout_blanco">
         <requestFocus />
     </EditText>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
         <Button
             android:id="@+id/btn_alarm_name_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/btn_blanco"
+            android:textColor="@color/azul_app"
             android:layout_weight="1"
             android:text="Actualizar"/>
 
@@ -44,7 +46,8 @@
             android:id="@+id/btn_alarm_name_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_layout"
+            android:background="@drawable/btn_blanco"
+            android:textColor="@color/azul_app"
             android:layout_weight="1"
             android:text="Cancelar"/>
     </LinearLayout>

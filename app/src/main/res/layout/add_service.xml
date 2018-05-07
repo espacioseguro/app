@@ -14,7 +14,7 @@
 
     <EditText
         android:id="@+id/add_service_address"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Dirección"
         android:imeOptions="actionNext"
@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/add_service_name"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Alias (Opcional)"
         android:imeOptions="actionDone"
@@ -41,10 +41,11 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
+        android:layout_marginBottom="15dp"
         android:layout_marginTop="@dimen/activity_vertical_margin">
         <Button
             android:id="@+id/btn_save_service"

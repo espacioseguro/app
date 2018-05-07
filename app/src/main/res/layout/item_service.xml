@@ -41,7 +41,7 @@
                 android:id="@+id/item_service_edit"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:tint="@color/azul_app"
+                android:tint="#fff"
                 android:src="@drawable/edit_alarm"/>
 
             <ImageView
@@ -50,7 +50,7 @@
                 android:id="@+id/item_service_delete"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:tint="@color/azul_app"
+                android:tint="#fff"
                 android:src="@drawable/delete_user"
                 android:visibility="gone"/>
 
@@ -60,7 +60,7 @@
                 android:id="@+id/item_service_copy"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:tint="@color/azul_app"
+                android:tint="#fff"
                 android:src="@drawable/icon_copy"/>
         </LinearLayout>
     </LinearLayout>

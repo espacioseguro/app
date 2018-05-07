@@ -15,7 +15,7 @@
 
     <EditText
         android:id="@+id/edit_name_service"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Nombre del Servicio"
         android:imeOptions="actionDone"
@@ -23,15 +23,16 @@
         android:maxLines="1"
         android:textColorHint="#fff"
         android:singleLine="true"
-        android:background="@drawable/input_layout">
+        android:background="@drawable/input_layout_blanco">
         <requestFocus />
     </EditText>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
         <Button
             android:id="@+id/btn_service_name_save"
             android:layout_width="match_parent"
