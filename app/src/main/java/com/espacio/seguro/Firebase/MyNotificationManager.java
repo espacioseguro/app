@@ -20,10 +20,6 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by Julian on 25/02/2018.
- */
-
 public class MyNotificationManager {
 
     private Context mCtx;
@@ -61,8 +57,9 @@ public class MyNotificationManager {
 
         NotificationCompat.Builder mBuilder;
         mBuilder = new NotificationCompat.Builder(mCtx);
-        mBuilder.setSmallIcon(R.drawable.logo_blue);
+        mBuilder.setSmallIcon(R.drawable.escudo_lobo_negativo);
         mBuilder.setLargeIcon(BitmapFactory.decodeResource(mCtx.getResources(), R.drawable.logo_blue));
+        mBuilder.setBadgeIconType(R.drawable.logo_blue);
         mBuilder.setContentTitle(title);
         mBuilder.setContentText(body);
         mBuilder.setSound(notification);

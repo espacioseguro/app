@@ -24,7 +24,7 @@
                 android:layout_weight="1"
                 android:id="@+id/item_notification"
                 android:textSize="10sp"
-                android:textColor="@color/cardview_light_background"
+                android:textColor="@color/azul_app"
                 android:gravity="center"/>
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:id="@+id/item_fecha"
                 android:textSize="12sp"
-                android:textColor="@color/cardview_light_background"
+                android:textColor="@color/azul_app"
                 android:gravity="center"/>
 
         </LinearLayout>
